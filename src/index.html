@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  </head>
 
-<body>
-  <header class="header">
-    <h1>Toggle</h1>
-  </header>
+  <body>
+    <header class="header">
+      <h1>Simon 5000</h1>
+    </header>
 
-  <div class="container">
-    <!-- <button id="one" class="one">&#9835;</button>
-    <button id="two" class="two">&#9835;</button>
-    <button id="three" class="three">&#9835;</button>
-    <button id="four" class="four">&#9835;</button>
+    <div class="super-container">
 
-    <button id="one" class="one buzz">&#9835;</button>
-    <button id="two" class="two buzz">&#9835;</button>
-    <button id="three" class="three buzz">&#9835;</button>
-    <button id="four" class="four buzz">&#9835;</button> -->
+      <div class="toggle-container">
+        <div class="togs-off">
+          <p>OFF</p>
+        </div>
+        <div class="togs">
+          <input type="checkbox" name="togs" class="togs-checkbox" id="tog-1">
+          <label class="togs-label" for="tog-1"></label>
+        </div>
+        <div class="togs-on">
+          <p>ON</p>
+        </div>
+      </div>
 
+      <div class="strict-container">
+        <input type="checkbox" name="strict" id="strict-id">
+        <label for="strict-id">Strict Mode</label>
+      </div>
 
+      <div class="button-container">
+        <button id="one" class="button1 one">&#9835;</button>
+        <button id="two" class="button1 two">&#9835;</button>
+        <button id="three" class="button1 three">&#9835;</button>
+        <button id="four" class="button1 four">&#9835;</button>
+      </div>
+      <!-- <button id="one" class="one buzz">&#9835;</button>
+      <button id="two" class="two buzz">&#9835;</button>
+      <button id="three" class="three buzz">&#9835;</button>
+      <button id="four" class="four buzz">&#9835;</button> -->
 
-
-<div class="togs">
-    <input type="checkbox" name="togs" class="togs-checkbox" id="tog-1" checked>
-    <label class="togs-label" for="tog-1"></label>
+<div class="display">
+  <p>Count:</p>
 </div>
 
+<div class="go-container">
+  <button id="go" class="button2">GO!</button>
+</div>
 
-  </div>
+    </div>
 
+    <script src="js/lib/jquery-1.11.3.min.js"></script>
+    <script src="js/lib/knockout-3.2.0.min.js"></script>
 
+    <script src="js/app.js"></script>
 
-
-
-
-
-
-
-  <script src="js/lib/jquery-1.11.3.min.js"></script>
-  <script src="js/lib/knockout-3.2.0.min.js"></script>
-
-  <script src="js/app.js"></script>
-
-
-</body>
-
-
+  </body>
 
 </html>

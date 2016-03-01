@@ -1,6 +1,21 @@
 // Toggle
+.toggle-container {
+  height: 30px;
+  // display: inline-block;
+  text-align: center;
+  margin: 20px auto;
+}
+.togs-on,
+.togs-off {
+  height: 35px;
+  display: inline-block;
+  vertical-align: middle;
+}
 .togs {
+  margin-left: 5px;
+  margin-right: 5px;
   position: relative;
+  display: inline-block;
   width: 60px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -9,39 +24,64 @@
 .togs-checkbox {
   display: none;
 }
+// This is the background bullet for the toggle
+// 1. Make the ends round (border-radius: 50% or == height)
+// 2. Background color: the 'unchecked' colour
 .togs-label {
   display: block;
   overflow: hidden;
+  // let width be dictated by parent .togs (60px)
+  // width: 50px;
   cursor: pointer;
   height: 30px;
   padding: 0;
   line-height: 30px;
   border: 2px solid #CCCCCC;
   border-radius: 30px;
-  background-color: #FFFFFF;
+  background-color: #CCCCCC;
+  // this determines the speed when things change (upon checking checkbox (by clicking label and label:before)):
+  // 2. background-color
   transition: background-color 0.3s ease-in;
 }
+// This is the 'switch'
+// 1. We make it a circle (border-radius: 50%); (or 30px, if height == 30px)
+// 2. We push it right (cos it's a ':before', remember)
+// 3. We position it absolute (the last positioned parent is 'togs'; the container)
+// 4. We set the 'unchecked' color
 .togs-label:before {
   content: "";
   display: block;
   width: 30px;
   margin: 0;
-  background: #FFFFFF;
+  background: #ffffff;
   position: absolute;
   top: 0;
   bottom: 0;
   right: 28px;
   border: 2px solid #CCCCCC;
   border-radius: 30px;
+  // this determines the speed when things change (upon checking checkbox (by clicking label and label:before)):
+  // 2. border
+  // 3. right
   transition: all 0.3s ease-in 0s;
 }
+// Now, we style what happens when the (invisible) checkbox is 'checked'
+// NB. '+'' is the adjacent sibling selector
+// elements with .togs-label that directly follow .togs-checkbox:checked
+// 1. Change the background bullet colour to 'checkbox-selected'
 .togs-checkbox:checked + .togs-label {
-  background-color: #49E845;
+  background-color: $toggle;
 }
-.togs-checkbox:checked + .togs-label,
+// 2. Change the border color for the bullet
+.togs-checkbox:checked + .togs-label {
+  border-color: $toggle;
+}
+// 3. Change the border color for the switch
 .togs-checkbox:checked + .togs-label:before {
-  border-color: #49E845;
+  border-color: $toggle;
 }
+// 4. Move the switch
+// When the checkbox is 'checked', move it flush right
 .togs-checkbox:checked + .togs-label:before {
   right: 0;
 }
