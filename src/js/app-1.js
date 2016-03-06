@@ -20,9 +20,12 @@ var arrButtons = {
 };
 
 $('#go').on('click', function() {
-  start();
-  $('#game-toggle').prop('checked', true);
-  $('#strict-id').prop('disabled', true);
+  if (arrSequence.length === 0) {
+    start();
+    gameStarted = true;
+    $('#game-toggle').prop('checked', true);
+    $('#strict-id').prop('disabled', true);
+  }
 });
 
 arrSequence = [];
@@ -135,16 +138,6 @@ var checkGuess = function(id) {
   }
 };
 
-// $('#one').on('click', function() {
-//   if (turn === 'player') {
-//     checkGuess($(this).data('tag'));
-//     sound1.play();
-//     addBuzz(1);
-//     delayContainer();
-//     // $(this).addClass('buzz');
-//   }
-// });
-
 $('button').on('click', function() {
   if (turn === 'player' && gameStarted) {
     checkGuess($(this).data('tag'));
@@ -154,26 +147,6 @@ $('button').on('click', function() {
     delayContainer();
   }
 });
-
-// $('#three').on('click', function() {
-//   if (turn === 'player') {
-//     checkGuess($(this).data('tag'));
-//     sound3.play();
-//     addBuzz(3);
-//     delayContainer();
-//     // $(this).addClass('buzz');
-//   }
-// });
-
-// $('#four').on('click', function() {
-//   if (turn === 'player') {
-//     checkGuess($(this).data('tag'));
-//     sound4.play();
-//     addBuzz(4);
-//     delayContainer();
-//     // $(this).addClass('buzz');
-//   }
-// });
 
 $('#strict-id').on('change', function() {
   strictMode = $(this).prop('checked');
