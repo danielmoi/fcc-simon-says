@@ -62,28 +62,36 @@ var addStep = function() {
 var arrGuesses = [];
 var addGuess = function(id) {
   arrGuesses.push(id);
+  for (var i = 0; i < arrGuesses.length; i++) {
+    if (arrGuesses[i] !== arrSequence[i]) {
+      console.log('incorrect');
+    }
+    else {
+      console.log('correct');
+    }
+  }
 };
 
 $('#one').on('click', function() {
-  addGuess(this.id);
+  addGuess($(this).data('tag'));
   sound1.play();
   $(this).addClass('buzz');
 });
 
 $('#two').on('click', function() {
-  addGuess(this.id);
+  addGuess($(this).data('tag'));
   sound2.play();
   $(this).addClass('buzz');
 });
 
 $('#three').on('click', function() {
-  addGuess(this.id);
+  addGuess($(this).data('tag'));
   sound3.play();
   $(this).addClass('buzz');
 });
 
 $('#four').on('click', function() {
-  addGuess(this.id);
+  addGuess($(this).data('tag'));
   sound4.play();
   $(this).addClass('buzz');
 });
