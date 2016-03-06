@@ -91,7 +91,7 @@ var checkGuess = function(id) {
     } else {
       console.log('incorrect');
       soundWrong.play();
-      // setTimeout(playSequence, 1500);
+      setTimeout(playSequence, 1500);
     }
     console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
 
