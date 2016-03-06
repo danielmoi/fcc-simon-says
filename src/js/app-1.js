@@ -29,36 +29,39 @@ var turn = 'simon';
 var count = 0;
 
 var playSequence = function() {
-// http://tobyho.com/2011/11/03/delaying-repeatedly/
+  // http://tobyho.com/2011/11/03/delaying-repeatedly/
   var queue = arrSequence.slice(0); // make a copy because we are modifying it
   function processNextItem() {
     var nextItem = queue.shift(); // take next item
     if (nextItem) {
       playSound(nextItem); // 3. process this item
-      changeColor(nextItem);
+      addBuzz(nextItem);
       delayContainer();
       setTimeout(processNextItem, 1000); // 4. pause
-      console.log('after setTimeout');
+      // console.log('after setTimeout');
+    } else {
+      console.log('NO MORE');
+      turn = 'player';
     }
   }
   processNextItem(); // this runs just once
-  console.log('after processNextItem');
+  // console.log('after processNextItem');
   count = 0;
 
 };
 
-var changeColor = function(num) {
-  $('button').removeClass('buzz');
-  console.log('changeColor');
+var addBuzz = function(num) {
+  // $('button').removeClass('buzz');
+  // console.log('addBuzz');
   arrButtons[num].addClass('buzz');
 };
 
-var removeColor = function() {
+var removeBuzz = function() {
   $('button').removeClass('buzz');
 };
 
-var delayContainer = function () {
-  var myDelay = setTimeout(removeColor, 400);
+var delayContainer = function() {
+  var myDelay = setTimeout(removeBuzz, 400);
 };
 
 var playSound = function(num) {
@@ -73,39 +76,62 @@ var addStep = function() {
 };
 var arrGuesses = [];
 var checkGuess = function(id) {
-  if (id === arrSequence[count]) {
-    arrGuesses[count] = id;
-    console.log('correct');
-    count += 1;
-  }
-  else {
-    console.log('incorrect');
-    setTimeout(playSequence, 1000);
-  }
-  console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
+  if (turn === 'player') {
+    if (id === arrSequence[count]) {
+      arrGuesses[count] = id;
+      console.log('correct');
+      count += 1;
+      if (count === arrSequence.length) {
+        console.log('now for simon');
+        turn = 'simon';
+        addStep();
+        setTimeout(playSequence, 1500);
+      }
+    } else {
+      console.log('incorrect');
+      // setTimeout(playSequence, 1500);
+    }
+    console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
 
+  }
 };
 
 $('#one').on('click', function() {
-  checkGuess($(this).data('tag'));
-  sound1.play();
-  $(this).addClass('buzz');
+  if (turn === 'player') {
+    checkGuess($(this).data('tag'));
+    sound1.play();
+    addBuzz(1);
+    delayContainer();
+    // $(this).addClass('buzz');
+  }
 });
 
 $('#two').on('click', function() {
-  checkGuess($(this).data('tag'));
-  sound2.play();
-  $(this).addClass('buzz');
+  if (turn === 'player') {
+    checkGuess($(this).data('tag'));
+    sound2.play();
+    // $(this).addClass('buzz');
+    addBuzz(2);
+    delayContainer();
+  }
 });
 
 $('#three').on('click', function() {
-  checkGuess($(this).data('tag'));
-  sound3.play();
-  $(this).addClass('buzz');
+  if (turn === 'player') {
+    checkGuess($(this).data('tag'));
+    sound3.play();
+    addBuzz(3);
+    delayContainer();
+    // $(this).addClass('buzz');
+  }
 });
 
 $('#four').on('click', function() {
-  checkGuess($(this).data('tag'));
-  sound4.play();
-  $(this).addClass('buzz');
+  if (turn === 'player') {
+    checkGuess($(this).data('tag'));
+    sound4.play();
+    addBuzz(4);
+    delayContainer();
+    // $(this).addClass('buzz');
+  }
 });
