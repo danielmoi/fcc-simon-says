@@ -3,6 +3,7 @@ var sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 var sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
 var sound4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+var soundWrong = new Audio('audio/beep1.mp3');
 
 var arrSounds = {
   1: sound1,
@@ -89,6 +90,7 @@ var checkGuess = function(id) {
       }
     } else {
       console.log('incorrect');
+      soundWrong.play();
       // setTimeout(playSequence, 1500);
     }
     console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
