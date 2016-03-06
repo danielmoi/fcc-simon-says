@@ -73,7 +73,65 @@ input {
   }
 }
 
+@keyframes onebuzz {
+  from {
+    background: $one;
+  }
+  30% {
+    background: $one-buzz;
+  }
+  70% {
+    background: $one-buzz;
+  }
+  to {
+    background: $one;
+  }
+}
 
+@keyframes twobuzz {
+  from {
+    background: $two;
+  }
+  30% {
+    background: $two-buzz;
+  }
+  70% {
+    background: $two-buzz;
+  }
+  to {
+    background: $two;
+  }
+}
+
+@keyframes threebuzz {
+  from {
+    background: $three;
+  }
+  30% {
+    background: $three-buzz;
+  }
+  70% {
+    background: $three-buzz;
+  }
+  to {
+    background: $three;
+  }
+}
+
+@keyframes fourbuzz {
+  from {
+    background: $four;
+  }
+  30% {
+    background: $four-buzz;
+  }
+  70% {
+    background: $four-buzz;
+  }
+  to {
+    background: $four;
+  }
+}
 
 .one {
   background: $one;
@@ -88,14 +146,22 @@ input {
   background: $four;
 }
 .one.buzz {
-  background: $one-buzz;
+  // background: $one-buzz;
+  animation-name: onebuzz;
+  animation-duration: 1s;
 }
 .two.buzz {
-  background: $two-buzz;
+  // background: $two-buzz;
+  animation-name: twobuzz;
+  animation-duration: 1s;
 }
 .three.buzz {
-  background: $three-buzz;
+  // background: $three-buzz;
+  animation-name: threebuzz;
+  animation-duration: 1s;
 }
 .four.buzz {
-  background: $four-buzz;
+  // background: $four-buzz;
+  animation-name: fourbuzz;
+  animation-duration: 1s;
 }

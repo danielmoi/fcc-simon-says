@@ -40,6 +40,7 @@ var playSequence = function() {
     }
   }
   processNextItem();
+  console.log('hello');
 
 };
 

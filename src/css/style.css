@@ -80,6 +80,62 @@ input:focus {
   outline: none;
 }
 
+@keyframes onebuzz {
+  from {
+    background: #9f0f17;
+  }
+  30% {
+    background: #ff4c4c;
+  }
+  70% {
+    background: #ff4c4c;
+  }
+  to {
+    background: #9f0f17;
+  }
+}
+@keyframes twobuzz {
+  from {
+    background: #094a8f;
+  }
+  30% {
+    background: #1c8cff;
+  }
+  70% {
+    background: #1c8cff;
+  }
+  to {
+    background: #094a8f;
+  }
+}
+@keyframes threebuzz {
+  from {
+    background: #cca707;
+  }
+  30% {
+    background: #fed93f;
+  }
+  70% {
+    background: #fed93f;
+  }
+  to {
+    background: #cca707;
+  }
+}
+@keyframes fourbuzz {
+  from {
+    background: #00a74a;
+  }
+  30% {
+    background: #13ff7c;
+  }
+  70% {
+    background: #13ff7c;
+  }
+  to {
+    background: #00a74a;
+  }
+}
 .one {
   background: #9f0f17;
 }
@@ -97,19 +153,23 @@ input:focus {
 }
 
 .one.buzz {
-  background: #ff4c4c;
+  animation-name: onebuzz;
+  animation-duration: 1s;
 }
 
 .two.buzz {
-  background: #1c8cff;
+  animation-name: twobuzz;
+  animation-duration: 1s;
 }
 
 .three.buzz {
-  background: #fed93f;
+  animation-name: threebuzz;
+  animation-duration: 1s;
 }
 
 .four.buzz {
-  background: #13ff7c;
+  animation-name: fourbuzz;
+  animation-duration: 1s;
 }
 
 .toggle-container {
