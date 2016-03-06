@@ -22,7 +22,7 @@ var arrButtons = {
 $('#go').on('click', function() {
   if (arrSequence.length === 0) {
     start();
-    gameStarted = true;
+    gameStatus = true;
     $('#game-toggle').prop('checked', true);
     $('#strict-id').prop('disabled', true);
   }
@@ -32,7 +32,8 @@ arrSequence = [];
 var turn = 'simon';
 var count = 0;
 var strictMode;
-var gameStarted;
+var gameStatus;
+var gameMax = 3;
 
 var playSequence = function() {
   // http://tobyho.com/2011/11/03/delaying-repeatedly/
@@ -110,6 +111,10 @@ var delayCount = function() {
   setTimeout(displayCount, 1500);
 };
 
+var displayMessage = function(str) {
+  $('.message').text(str);
+};
+
 var arrGuesses = [];
 var checkGuess = function(id) {
   if (turn === 'player') {
@@ -119,9 +124,20 @@ var checkGuess = function(id) {
       count += 1;
       if (count === arrSequence.length) {
         console.log('now for simon');
-        turn = 'simon';
-        addStep();
-        setTimeout(playSequence, 1500);
+
+        // Check if gameMax is reached
+        if (count === gameMax) {
+          displayMessage('You win!');
+          gameStatus = false;
+
+        }
+
+        // Else, continue game
+        else {
+          turn = 'simon';
+          addStep();
+          setTimeout(playSequence, 1500);
+        }
       }
     } else {
       console.log('incorrect');
@@ -139,7 +155,7 @@ var checkGuess = function(id) {
 };
 
 $('button').on('click', function() {
-  if (turn === 'player' && gameStarted) {
+  if (turn === 'player' && gameStatus) {
     checkGuess($(this).data('tag'));
     arrSounds[$(this).data('tag')].play();
     // $(this).addClass('buzz');
@@ -154,9 +170,9 @@ $('#strict-id').on('change', function() {
 
 $('#game-toggle').on('change', function() {
   if ($(this).prop('checked')) {
-    gameStarted = true;
+    gameStatus = true;
   } else {
-    gameStarted = false;
+    gameStatus = false;
     reset();
   }
 
