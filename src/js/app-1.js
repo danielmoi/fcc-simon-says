@@ -1,4 +1,3 @@
-var arrSequence = [];
 var sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 var sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
@@ -19,24 +18,165 @@ var arrButtons = {
   4: $('#four')
 };
 
-$('#go').on('click', function() {
-  if (arrSequence.length === 0) {
-    start();
-    gameStatus = true;
-    $('#game-toggle').prop('checked', true);
-    $('#strict-id').prop('disabled', true);
-  }
-});
 
-arrSequence = [];
+
+// Set up variables
+var arrGuesses = [];
+var arrSequence = [];
+
 var turn = 'simon';
 var count = 0;
 var strictMode;
-var gameStatus;
+var gameActive = false;
+var powerOn = false;
 var gameMax = 3;
 
+
+
+
+// Light up the guess buttons
+var addBuzz = function(num) {
+  // $('button').removeClass('buzz');
+  // console.log('addBuzz');
+  arrButtons[num].addClass('buzz');
+};
+
+var removeBuzz = function() {
+  $('button').removeClass('buzz');
+};
+
+var delayContainer = function() {
+  var myDelay = setTimeout(removeBuzz, 400);
+};
+
+// Play sound
+var playSound = function(num) {
+  arrSounds[num].play();
+};
+
+
+
+
+////////////////////////
+// Logic - Game Controls
+
+// Reset
+var reset = function() {
+  powerOn = false;
+  gameActive = false;
+  arrSequence = [];
+  arrGuesses = [];
+  $('.count').text(0);
+  displayMessage('Turn the power on!');
+  $('#strict-id').prop('checked', false);
+  $('#strict-id').prop('disabled', false);
+};
+
+// Start
+var start = function() {
+  gameActive = true;
+  $('#game-toggle').prop('checked', true);
+  $('#strict-id').prop('disabled', true);
+  setTimeout(addStep, 2000);
+  setTimeout(playSequence, 2000);
+
+};
+
+// Go button
+$('#go').on('click', function() {
+  if (gameActive === false) {
+    displayWin('');
+    displayMessage('Listen carefully!');
+    start();
+  }
+});
+
+
+/////////////////////////
+// Update user interface
+var displayCount = function() {
+  var count = arrSequence.length;
+  $('.count').text(count);
+};
+
+var delayCount = function() {
+  setTimeout(displayCount, 1500);
+};
+
+var displayMessage = function(str) {
+  $('.message').text(str);
+};
+
+var displayWin = function(str) {
+  $('.win').text(str);
+};
+
+//////////////////////////
+// Logic - Add step
+
+var addStep = function() {
+  var num = Math.floor(Math.random() * 4) + 1;
+  arrSequence.push(num);
+  if (arrSequence.length === 1) {
+    $('.count').text(1);
+  } else {
+    delayCount();
+  }
+};
+
+// Logic – Guess Checking
+var checkGuess = function(id) {
+  if (turn === 'player') {
+
+    // If guess is correct
+    if (id === arrSequence[count]) {
+      arrGuesses[count] = id;
+      console.log('correct');
+      count += 1;
+      if (count === arrSequence.length) {
+        displayMessage('Well done. Simon will add one more.');
+        console.log('now for simon');
+
+        // Check if gameMax is reached
+        if (count === gameMax) {
+          displayWin('You win!');
+          reset();
+        }
+
+        // Else, continue game
+        else {
+          turn = 'simon';
+          addStep();
+          setTimeout(playSequence, 1500);
+        }
+      }
+    }
+
+    // If guess is incorrect
+    else {
+      console.log('incorrect');
+      displayMessage('Nup. That wasn\'t it.');
+      soundWrong.play();
+
+      // Incorrect in strict mode will reset game
+      if (strictMode) {
+        reset();
+      }
+      // Incorrect in normal mode will continue game
+      else {
+        setTimeout(playSequence, 1500);
+      }
+    }
+    console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
+
+  }
+};
+
+/////////////////////////
+// Play Sequence
 var playSequence = function() {
   // http://tobyho.com/2011/11/03/delaying-repeatedly/
+  displayMessage('Listen carefully!');
   var queue = arrSequence.slice(0); // make a copy because we are modifying it
   function processNextItem() {
     var nextItem = queue.shift(); // take next item
@@ -57,105 +197,11 @@ var playSequence = function() {
 
 };
 
-var addBuzz = function(num) {
-  // $('button').removeClass('buzz');
-  // console.log('addBuzz');
-  arrButtons[num].addClass('buzz');
-};
+//////////////////////////
+// User Interface Controls
 
-var removeBuzz = function() {
-  $('button').removeClass('buzz');
-};
-
-var delayContainer = function() {
-  var myDelay = setTimeout(removeBuzz, 400);
-};
-
-var playSound = function(num) {
-  arrSounds[num].play();
-};
-
-
-var addStep = function() {
-  var num = Math.floor(Math.random() * 4) + 1;
-  arrSequence.push(num);
-  if (arrSequence.length === 1) {
-    $('.count').text(1);
-  } else {
-    delayCount();
-  }
-};
-
-var reset = function() {
-  arrSequence = [];
-  arrGuesses = [];
-  $('.count').text(0);
-  $('#strict-id').prop('checked', false);
-  $('#strict-id').prop('disabled', false);
-
-
-};
-
-var start = function() {
-  setTimeout(addStep, 2000);
-  setTimeout(playSequence, 2000);
-};
-
-
-var displayCount = function() {
-  var count = arrSequence.length;
-  $('.count').text(count);
-};
-
-var delayCount = function() {
-  setTimeout(displayCount, 1500);
-};
-
-var displayMessage = function(str) {
-  $('.message').text(str);
-};
-
-var arrGuesses = [];
-var checkGuess = function(id) {
-  if (turn === 'player') {
-    if (id === arrSequence[count]) {
-      arrGuesses[count] = id;
-      console.log('correct');
-      count += 1;
-      if (count === arrSequence.length) {
-        console.log('now for simon');
-
-        // Check if gameMax is reached
-        if (count === gameMax) {
-          displayMessage('You win!');
-          gameStatus = false;
-
-        }
-
-        // Else, continue game
-        else {
-          turn = 'simon';
-          addStep();
-          setTimeout(playSequence, 1500);
-        }
-      }
-    } else {
-      console.log('incorrect');
-      soundWrong.play();
-      if (strictMode) {
-        reset();
-
-      } else {
-        setTimeout(playSequence, 1500);
-      }
-    }
-    console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
-
-  }
-};
-
-$('button').on('click', function() {
-  if (turn === 'player' && gameStatus) {
+$('.button-guess').on('click', function() {
+  if (turn === 'player' && gameActive) {
     checkGuess($(this).data('tag'));
     arrSounds[$(this).data('tag')].play();
     // $(this).addClass('buzz');
@@ -170,11 +216,9 @@ $('#strict-id').on('change', function() {
 
 $('#game-toggle').on('change', function() {
   if ($(this).prop('checked')) {
-    gameStatus = true;
+    displayMessage('Click GO to start!');
+    powerOn = true;
   } else {
-    gameStatus = false;
     reset();
   }
-
-
 });
