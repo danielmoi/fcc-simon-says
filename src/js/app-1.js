@@ -28,6 +28,7 @@ $('#go').click(function() {
 arrSequence = [];
 var turn = 'simon';
 var count = 0;
+var strictMode;
 
 var playSequence = function() {
   // http://tobyho.com/2011/11/03/delaying-repeatedly/
@@ -41,7 +42,7 @@ var playSequence = function() {
       setTimeout(processNextItem, 1000); // 4. pause
       // console.log('after setTimeout');
     } else {
-      console.log('NO MORE');
+      console.log('now for player');
       turn = 'player';
     }
   }
@@ -80,6 +81,12 @@ var addStep = function() {
   }
 };
 
+var reset = function() {
+  arrSequence = [];
+  $('.count').text(0);
+  setTimeout(addStep, 2000);
+  setTimeout(playSequence, 2000);
+};
 
 
 var displayCount = function() {
@@ -107,7 +114,12 @@ var checkGuess = function(id) {
     } else {
       console.log('incorrect');
       soundWrong.play();
-      setTimeout(playSequence, 1500);
+      if (strictMode) {
+        reset();
+
+      } else {
+        setTimeout(playSequence, 1500);
+      }
     }
     console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
 
@@ -152,4 +164,8 @@ $('#four').on('click', function() {
     delayContainer();
     // $(this).addClass('buzz');
   }
+});
+
+$('#strict-id').on('change', function() {
+  strictMode = $(this).prop('checked');
 });
