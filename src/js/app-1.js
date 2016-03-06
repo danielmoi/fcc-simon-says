@@ -25,6 +25,7 @@ $('#go').click(function() {
 
 arrSequence = [];
 var turn = 'simon';
+var count = 0;
 
 var playSequence = function() {
 // http://tobyho.com/2011/11/03/delaying-repeatedly/
@@ -39,7 +40,7 @@ var playSequence = function() {
     }
   }
   processNextItem();
-  console.log('hello');
+  count = 0;
 
 };
 
@@ -60,38 +61,39 @@ var addStep = function() {
 
 };
 var arrGuesses = [];
-var addGuess = function(id) {
-  arrGuesses.push(id);
-  for (var i = 0; i < arrGuesses.length; i++) {
-    if (arrGuesses[i] !== arrSequence[i]) {
-      console.log('incorrect');
-    }
-    else {
-      console.log('correct');
-    }
+var checkGuess = function(id) {
+  if (id === arrSequence[count]) {
+    arrGuesses[count] = id;
+    console.log('correct');
+    count += 1;
   }
+  else {
+    console.log('incorrect');
+  }
+  console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
+
 };
 
 $('#one').on('click', function() {
-  addGuess($(this).data('tag'));
+  checkGuess($(this).data('tag'));
   sound1.play();
   $(this).addClass('buzz');
 });
 
 $('#two').on('click', function() {
-  addGuess($(this).data('tag'));
+  checkGuess($(this).data('tag'));
   sound2.play();
   $(this).addClass('buzz');
 });
 
 $('#three').on('click', function() {
-  addGuess($(this).data('tag'));
+  checkGuess($(this).data('tag'));
   sound3.play();
   $(this).addClass('buzz');
 });
 
 $('#four').on('click', function() {
-  addGuess($(this).data('tag'));
+  checkGuess($(this).data('tag'));
   sound4.play();
   $(this).addClass('buzz');
 });
