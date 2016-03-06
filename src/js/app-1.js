@@ -135,45 +135,45 @@ var checkGuess = function(id) {
   }
 };
 
-$('#one').on('click', function() {
-  if (turn === 'player') {
+// $('#one').on('click', function() {
+//   if (turn === 'player') {
+//     checkGuess($(this).data('tag'));
+//     sound1.play();
+//     addBuzz(1);
+//     delayContainer();
+//     // $(this).addClass('buzz');
+//   }
+// });
+
+$('button').on('click', function() {
+  if (turn === 'player' && gameStarted) {
     checkGuess($(this).data('tag'));
-    sound1.play();
-    addBuzz(1);
-    delayContainer();
+    arrSounds[$(this).data('tag')].play();
     // $(this).addClass('buzz');
+    addBuzz($(this).data('tag'));
+    delayContainer();
   }
 });
 
-$('#two').on('click', function() {
-  if (turn === 'player') {
-    checkGuess($(this).data('tag'));
-    sound2.play();
-    // $(this).addClass('buzz');
-    addBuzz(2);
-    delayContainer();
-  }
-});
+// $('#three').on('click', function() {
+//   if (turn === 'player') {
+//     checkGuess($(this).data('tag'));
+//     sound3.play();
+//     addBuzz(3);
+//     delayContainer();
+//     // $(this).addClass('buzz');
+//   }
+// });
 
-$('#three').on('click', function() {
-  if (turn === 'player') {
-    checkGuess($(this).data('tag'));
-    sound3.play();
-    addBuzz(3);
-    delayContainer();
-    // $(this).addClass('buzz');
-  }
-});
-
-$('#four').on('click', function() {
-  if (turn === 'player') {
-    checkGuess($(this).data('tag'));
-    sound4.play();
-    addBuzz(4);
-    delayContainer();
-    // $(this).addClass('buzz');
-  }
-});
+// $('#four').on('click', function() {
+//   if (turn === 'player') {
+//     checkGuess($(this).data('tag'));
+//     sound4.play();
+//     addBuzz(4);
+//     delayContainer();
+//     // $(this).addClass('buzz');
+//   }
+// });
 
 $('#strict-id').on('change', function() {
   strictMode = $(this).prop('checked');
