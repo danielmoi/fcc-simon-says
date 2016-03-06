@@ -19,16 +19,17 @@ var arrButtons = {
   4: $('#four')
 };
 
-$('#go').click(function() {
-  addStep();
-  playSequence();
-
+$('#go').on('click', function() {
+  start();
+  $('#game-toggle').prop('checked', true);
+  $('#strict-id').prop('disabled', true);
 });
 
 arrSequence = [];
 var turn = 'simon';
 var count = 0;
 var strictMode;
+var gameStarted;
 
 var playSequence = function() {
   // http://tobyho.com/2011/11/03/delaying-repeatedly/
@@ -83,7 +84,15 @@ var addStep = function() {
 
 var reset = function() {
   arrSequence = [];
+  arrGuesses = [];
   $('.count').text(0);
+  $('#strict-id').prop('checked', false);
+  $('#strict-id').prop('disabled', false);
+
+
+};
+
+var start = function() {
   setTimeout(addStep, 2000);
   setTimeout(playSequence, 2000);
 };
@@ -168,4 +177,15 @@ $('#four').on('click', function() {
 
 $('#strict-id').on('change', function() {
   strictMode = $(this).prop('checked');
+});
+
+$('#game-toggle').on('change', function() {
+  if ($(this).prop('checked')) {
+    gameStarted = true;
+  } else {
+    gameStarted = false;
+    reset();
+  }
+
+
 });
