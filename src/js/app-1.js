@@ -73,8 +73,24 @@ var playSound = function(num) {
 var addStep = function() {
   var num = Math.floor(Math.random() * 4) + 1;
   arrSequence.push(num);
-
+  if (arrSequence.length === 1) {
+    $('.count').text(1);
+  } else {
+    delayCount();
+  }
 };
+
+
+
+var displayCount = function() {
+  var count = arrSequence.length;
+  $('.count').text(count);
+};
+
+var delayCount = function() {
+  setTimeout(displayCount, 1500);
+};
+
 var arrGuesses = [];
 var checkGuess = function(id) {
   if (turn === 'player') {
