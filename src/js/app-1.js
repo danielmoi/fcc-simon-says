@@ -19,6 +19,7 @@ var arrButtons = {
 };
 
 $('#go').click(function() {
+  addStep();
   playSequence();
 
 });
@@ -29,26 +30,36 @@ var count = 0;
 
 var playSequence = function() {
 // http://tobyho.com/2011/11/03/delaying-repeatedly/
-  addStep();
   var queue = arrSequence.slice(0); // make a copy because we are modifying it
   function processNextItem() {
     var nextItem = queue.shift(); // take next item
     if (nextItem) {
       playSound(nextItem); // 3. process this item
       changeColor(nextItem);
+      delayContainer();
       setTimeout(processNextItem, 1000); // 4. pause
+      console.log('after setTimeout');
     }
   }
-  processNextItem();
+  processNextItem(); // this runs just once
+  console.log('after processNextItem');
   count = 0;
 
 };
 
 var changeColor = function(num) {
   $('button').removeClass('buzz');
+  console.log('changeColor');
   arrButtons[num].addClass('buzz');
 };
 
+var removeColor = function() {
+  $('button').removeClass('buzz');
+};
+
+var delayContainer = function () {
+  var myDelay = setTimeout(removeColor, 400);
+};
 
 var playSound = function(num) {
   arrSounds[num].play();
@@ -69,6 +80,7 @@ var checkGuess = function(id) {
   }
   else {
     console.log('incorrect');
+    setTimeout(playSequence, 1000);
   }
   console.log('arrSequence: ', arrSequence, 'arrGuesses: ', arrGuesses);
 

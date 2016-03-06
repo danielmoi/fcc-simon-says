@@ -172,6 +172,10 @@ input:focus {
   animation-duration: 1s;
 }
 
+.red {
+  color: red;
+}
+
 .toggle-container {
   height: 30px;
   text-align: center;
