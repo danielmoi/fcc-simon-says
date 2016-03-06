@@ -25,10 +25,11 @@ $('#go').click(function() {
 
 var timeoutID;
 
-arrSequence = [1, 3, 2, 4];
+arrSequence = [];
 
 var playSequence = function() {
 // http://tobyho.com/2011/11/03/delaying-repeatedly/
+  addStep();
   var queue = arrSequence.slice(0); // make a copy because we are modifying it
   function processNextItem() {
     var nextItem = queue.shift(); // take next item
@@ -45,13 +46,6 @@ var playSequence = function() {
 var changeColor = function(num) {
   $('button').removeClass('buzz');
   arrButtons[num].addClass('buzz');
-  // arrButtons[num].removeClass('buzz');
-
-  // var removeColor = function(num) {
-  //   arrButtons[num].removeClass('buzz');
-  //   console.log('hello');
-  // };
-  // setTimeout(removeColor(num), 2000);
 };
 
 
