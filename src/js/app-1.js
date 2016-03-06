@@ -23,9 +23,8 @@ $('#go').click(function() {
 
 });
 
-var timeoutID;
-
 arrSequence = [];
+var turn = 'simon';
 
 var playSequence = function() {
 // http://tobyho.com/2011/11/03/delaying-repeatedly/
@@ -60,23 +59,31 @@ var addStep = function() {
   arrSequence.push(num);
 
 };
+var arrGuesses = [];
+var addGuess = function(id) {
+  arrGuesses.push(id);
+};
 
 $('#one').on('click', function() {
+  addGuess(this.id);
   sound1.play();
   $(this).addClass('buzz');
 });
 
 $('#two').on('click', function() {
+  addGuess(this.id);
   sound2.play();
   $(this).addClass('buzz');
 });
 
 $('#three').on('click', function() {
+  addGuess(this.id);
   sound3.play();
   $(this).addClass('buzz');
 });
 
 $('#four').on('click', function() {
+  addGuess(this.id);
   sound4.play();
   $(this).addClass('buzz');
 });
