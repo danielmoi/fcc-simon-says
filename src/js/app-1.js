@@ -11,6 +11,13 @@ var arrSounds = {
   4: sound4
 };
 
+var arrButtons = {
+  1: $('#one'),
+  2: $('#two'),
+  3: $('#three'),
+  4: $('#four')
+};
+
 $('#go').click(function() {
   playSequence();
 
@@ -18,32 +25,38 @@ $('#go').click(function() {
 
 var timeoutID;
 
-arrSequence = [1, 3, 2];
+arrSequence = [1, 3, 2, 4];
 
 var playSequence = function() {
-  for (var i = 0; i < arrSequence.length; i++) {
-    num = arrSequence[i];
-    playSound(num);
-
-  }
-};
-
-
-
-
-playSound = function(num) {
-
-  var queue = items.slice(0); // make a copy because we are modifying it
+// http://tobyho.com/2011/11/03/delaying-repeatedly/
+  var queue = arrSequence.slice(0); // make a copy because we are modifying it
   function processNextItem() {
     var nextItem = queue.shift(); // take next item
     if (nextItem) {
-      processItem(nextItem); // 3. process this item
+      playSound(nextItem); // 3. process this item
+      changeColor(nextItem);
       setTimeout(processNextItem, 1000); // 4. pause
     }
   }
   processNextItem();
 
-  var myID = setTimeout(arrSounds[num].play(), 1000);
+};
+
+var changeColor = function(num) {
+  $('button').removeClass('buzz');
+  arrButtons[num].addClass('buzz');
+  // arrButtons[num].removeClass('buzz');
+
+  // var removeColor = function(num) {
+  //   arrButtons[num].removeClass('buzz');
+  //   console.log('hello');
+  // };
+  // setTimeout(removeColor(num), 2000);
+};
+
+
+var playSound = function(num) {
+  arrSounds[num].play();
 };
 
 
