@@ -21,13 +21,15 @@ body {
 
 .header {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
+  color: #42C0FB;
 }
 
 .super-container {
   max-width: 50%;
-  margin: 0 auto;
-  padding-top: 30px;
+  margin: 30px auto 0;
+  border: 3px solid #42C0FB;
+  border-radius: 1em;
 }
 
 .button-container,
@@ -36,6 +38,11 @@ body {
 .display {
   text-align: center;
   margin: 20px 0;
+}
+
+.message,
+.win {
+  color: #42C0FB;
 }
 
 input {
@@ -50,7 +57,7 @@ input:focus {
   outline: none;
 }
 
-.button1 {
+.button-guess {
   padding: 10px;
   background-color: gray;
   width: 60px;
@@ -61,22 +68,22 @@ input:focus {
   border-radius: 5px;
   cursor: pointer;
 }
-.button1:focus {
+.button-guess:focus {
   outline: none;
 }
 
-.button2 {
+.button-go {
   padding: 10px;
-  background-color: green;
+  background-color: #42C0FB;
   width: 60px;
   height: 60px;
   color: white;
   font-size: 1.3em;
-  border: 1px solid gray;
+  border: 1px solid #42C0FB;
   border-radius: 50%;
   cursor: pointer;
 }
-.button2:focus {
+.button-go:focus {
   outline: none;
 }
 
@@ -166,10 +173,6 @@ input:focus {
 
 .four.buzz {
   background: #13ff7c;
-}
-
-.red {
-  color: red;
 }
 
 .toggle-container {

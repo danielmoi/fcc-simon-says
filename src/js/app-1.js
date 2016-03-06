@@ -1,3 +1,12 @@
+//////////////////
+//
+// Simon 5000
+//
+// by Daniel Moi Feb 2016
+
+
+////////////////
+// Set up variables
 var sound1 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 var sound2 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
 var sound3 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
@@ -18,9 +27,6 @@ var arrButtons = {
   4: $('#four')
 };
 
-
-
-// Set up variables
 var arrGuesses = [];
 var arrSequence = [];
 
@@ -31,9 +37,7 @@ var gameActive = false;
 var powerOn = false;
 var gameMax = 3;
 
-
-
-
+///////////////////////////
 // Light up the guess buttons
 var addBuzz = function(num) {
   // $('button').removeClass('buzz');
@@ -67,7 +71,8 @@ var reset = function() {
   arrSequence = [];
   arrGuesses = [];
   $('.count').text(0);
-  displayMessage('Turn the power on!');
+  displayMessage('Switch Simon ON!');
+  $('#game-toggle').prop('checked', false);
   $('#strict-id').prop('checked', false);
   $('#strict-id').prop('disabled', false);
 };

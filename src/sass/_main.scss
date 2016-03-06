@@ -14,12 +14,14 @@ body {
 // TYPOGRAPHY
 .header {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
+  color: $toggle;
 }
 .super-container {
   max-width: 50%;
-  margin: 0 auto;
-  padding-top: 30px;
+  margin: 30px auto 0;
+  border: 3px solid $toggle;
+  border-radius: 1em;
 }
 // SECTIONS
 
@@ -29,6 +31,11 @@ body {
 .display {
   text-align: center;
   margin: 20px 0;
+}
+
+.message,
+.win {
+  color: $toggle;
 }
 
 // ELEMENTS
@@ -43,7 +50,7 @@ input {
     outline: none;
   }
 }
-.button1 {
+.button-guess {
   padding: 10px;
   background-color: gray;
   width: 60px;
@@ -58,14 +65,14 @@ input {
   }
 }
 
-.button2 {
+.button-go {
   padding: 10px;
-  background-color: green;
+  background-color: $toggle;
   width: 60px;
   height: 60px;
   color: white;
   font-size: 1.3em;
-  border: 1px solid gray;
+  border: 1px solid $toggle;
   border-radius: 50%;
   cursor: pointer;
   &:focus {
@@ -164,8 +171,4 @@ input {
   background: $four-buzz;
   // animation-name: fourbuzz;
   // animation-duration: 1s;
-}
-
-.red {
-  color: red;
 }
